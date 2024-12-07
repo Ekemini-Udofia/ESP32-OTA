@@ -3,6 +3,7 @@
 
 // Wi-Fi credentials
 const char* ssid = "ekeminiudofia";
+const char* password = "ekeminietuk";
 
 // FreeRTOS task for OTA updates
 void otaTask(void* parameter) {
