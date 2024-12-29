@@ -80,3 +80,6 @@ The `otaTask` function manages the OTA update process:
 - **Progress**: Displays the percentage of the update completed.
 - **End**: Confirms successful completion.
 - **Errors**: Prints specific errors such as authentication, connection, or transfer failures.
+
+
+**This File was made using ChatGpt(no time to write too much explanatios**
