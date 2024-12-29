@@ -1,15 +1,13 @@
 #include <WiFi.h>
 #include <ArduinoOTA.h>
 
-// Wi-Fi credentials
-const char* ssid = "ekeminiudofia";
-const char* password = "ekeminietuk";
 
-// FreeRTOS task for OTA updates
+const char* ssid = "ssid";
+const char* password = "password";
+
 void otaTask(void* parameter) {
     ArduinoOTA.setHostname("ESP32-OTA-Example");
     
-    // Setup OTA callbacks
     ArduinoOTA.onStart([]() {
         String type = ArduinoOTA.getCommand() == U_FLASH ? "sketch" : "filesystem";
         Serial.println("Start updating " + type);
@@ -34,17 +32,16 @@ void otaTask(void* parameter) {
 
     ArduinoOTA.begin();
 
-    // Main loop for OTA task
+  
     for (;;) {
         ArduinoOTA.handle();
-        vTaskDelay(10 / portTICK_PERIOD_MS); // Avoid blocking other tasks
+        vTaskDelay(10 / portTICK_PERIOD_MS);
     }
 }
 
 void setup() {
     Serial.begin(115200);
 
-    // Connect to Wi-Fi
     WiFi.begin(ssid, password);
     while (WiFi.status() != WL_CONNECTED) {
         delay(1000);
@@ -52,12 +49,10 @@ void setup() {
     }
     Serial.println("Connected to Wi-Fi!");
 
-    // Create the OTA task
     xTaskCreate(otaTask, "OTA Task", 4096, NULL, 1, NULL);
 }
 
 void loop() {
-    // Your main application code
     Serial.println("Running main loop...");
     delay(2000);
 }
